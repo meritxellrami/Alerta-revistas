@@ -57,12 +57,6 @@ journals:
   - name: Research & Politics
     issn: "2053-1680"
     calls_url: ""
-  - name: Journal of Public Administration Research and Theory
-    issn: "1053-1858"
-    calls_url: ""
-  - name: Policy & Society
-    issn: "1449-4035"
-    calls_url: ""
   - name: Political Geography
     issn: "0962-6298"
     calls_url: ""
@@ -71,7 +65,4 @@ journals:
     calls_url: ""
   - name: Politics & Gender
     issn: "1743-923X"
-    calls_url: ""
-  - name: Journal of European Public Policy
-    issn: "1350-1763"
     calls_url: ""

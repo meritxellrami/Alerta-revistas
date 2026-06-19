@@ -35,6 +35,10 @@ fmt_item <- function(w) {
 
 new_ids <- list()  # acumula ids nuevos por sección para guardarlos al final
 
+# Títulos que no son artículos de investigación (se excluyen de la sección 1).
+SKIP_TITLE <- c("front matter", "back matter", "book review", "correction to",
+                "corrigendum", "erratum", "issue information", "editorial board")
+
 # ---- Sección 1: novedades por revista (agrupadas por revista) ----------------
 message("[1/2] Novedades por revista…")
 sec1 <- character(0)
@@ -43,6 +47,8 @@ for (j in revistas) {
   items <- character(0)
   for (w in works) {
     if (is.na(w$id) || w$id %in% seen) next
+    tl <- tolower(w$title)
+    if (any(vapply(SKIP_TITLE, function(k) grepl(k, tl, fixed = TRUE), logical(1)))) next
     aut   <- if (nchar(w$authors) > 0) w$authors else "autores n/d"
     items <- c(items, glue("- <span style=\"font-size:90%\">[{w$title}]({w$url}) — {aut}</span>"))
     new_ids$articulos <- c(new_ids$articulos, w$id)
