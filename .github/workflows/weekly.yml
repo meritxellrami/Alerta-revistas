@@ -3,7 +3,12 @@ name: Alerta revistas semanal
 on:
   schedule:
     - cron: "0 13 * * 4"   # jueves 13:00 UTC = 15:00 hora española (verano) / 14:00 (invierno)
-  workflow_dispatch: {}    # permite lanzarlo a mano desde la pestaña Actions
+  workflow_dispatch:        # permite lanzarlo a mano desde la pestaña Actions
+    inputs:
+      ignore_seen:
+        description: "Reenviar todo lo de la ventana (ignora la memoria; útil para ver el formato). No la modifica."
+        type: boolean
+        default: false
 
 jobs:
   alerta:
@@ -27,6 +32,7 @@ jobs:
           SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
+          IGNORE_SEEN: ${{ inputs.ignore_seen == true && '1' || '0' }}
         run: Rscript R/run.R
 
       - name: Guardar estado (artículos ya enviados)

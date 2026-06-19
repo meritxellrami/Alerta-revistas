@@ -17,16 +17,17 @@ root <- tryCatch(dirname(dirname(normalizePath(sys.frame(1)$ofile))), error = fu
 if (!file.exists(file.path(root, "R", "utils.R"))) root <- getwd()
 source(file.path(root, "R", "utils.R"))
 
-DAYS_BACK <- as.integer(Sys.getenv("DAYS_BACK", "8"))
-TOP_SJR   <- as.integer(Sys.getenv("TOP_SJR", "80"))
-from_date <- as.character(Sys.Date() - DAYS_BACK)
-DRY_RUN   <- Sys.getenv("DRY_RUN") == "1"
+DAYS_BACK   <- as.integer(Sys.getenv("DAYS_BACK", "8"))
+TOP_SJR     <- as.integer(Sys.getenv("TOP_SJR", "80"))
+from_date   <- as.character(Sys.Date() - DAYS_BACK)
+DRY_RUN     <- Sys.getenv("DRY_RUN") == "1"
+IGNORE_SEEN <- Sys.getenv("IGNORE_SEEN") == "1"  # reenvía todo lo de la ventana sin tocar la memoria
 
 revistas <- read_yaml_utf8(file.path(root, "config", "revistas.yaml"))$journals
 temas    <- read_yaml_utf8(file.path(root, "config", "temas.yaml"))$groups
 wlset    <- load_whitelist_issns(file.path(root, "config", "sjr_political_science.csv"), top_n = TOP_SJR)
 seen_path <- file.path(root, "state", "seen.csv")
-seen      <- load_seen(seen_path)
+seen      <- if (IGNORE_SEEN) character(0) else load_seen(seen_path)
 
 fmt_item <- function(w) {
   glue("- **[{w$title}]({w$url})** — {ifelse(nchar(w$authors)>0, w$authors, 'autores n/d')} ",
@@ -124,6 +125,10 @@ smtp_send(
 message("Correo enviado a ", to)
 
 # ---- Guardar estado ----------------------------------------------------------
-append_seen(seen_path, unique(new_ids$articulos), "articulos")
-append_seen(seen_path, unique(new_ids$temas),     "temas")
-message("Estado actualizado.")
+if (IGNORE_SEEN) {
+  message("IGNORE_SEEN activo: no se modifica la memoria.")
+} else {
+  append_seen(seen_path, unique(new_ids$articulos), "articulos")
+  append_seen(seen_path, unique(new_ids$temas),     "temas")
+  message("Estado actualizado.")
+}
