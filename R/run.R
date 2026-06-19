@@ -35,26 +35,24 @@ fmt_item <- function(w) {
 
 new_ids <- list()  # acumula ids nuevos por sección para guardarlos al final
 
-# ---- Sección 1: novedades por revista ---------------------------------------
-message("[1/3] Novedades por revista…")
+# ---- Sección 1: novedades por revista (agrupadas por revista) ----------------
+message("[1/2] Novedades por revista…")
 sec1 <- character(0)
 for (j in revistas) {
   works <- lapply(oa_works_by_issn(j$issn, from_date), extract_work)
+  items <- character(0)
   for (w in works) {
     if (is.na(w$id) || w$id %in% seen) next
-    sec1 <- c(sec1, fmt_item(w))
+    aut   <- if (nchar(w$authors) > 0) w$authors else "autores n/d"
+    items <- c(items, glue("- <span style=\"font-size:90%\">[{w$title}]({w$url}) — {aut}</span>"))
     new_ids$articulos <- c(new_ids$articulos, w$id)
   }
+  if (length(items)) sec1 <- c(sec1, glue("\n**{j$name}**\n"), items)
   Sys.sleep(0.15)
 }
 
-# ---- Sección 2: convocatorias (desactivada por ahora) -----------------------
-# La detección automática de CFP/special issues/symposiums está aparcada: las
-# webs de convocatorias de las editoriales comerciales bloquean el acceso (403)
-# y no existe API. Las funciones para retomarlo siguen en utils.R.
-
-# ---- Sección 3: temas en las top-80 revistas SJR ----------------------------
-message(glue("[3/3] Temas en las top-{TOP_SJR} revistas SJR…"))
+# ---- Sección 2: temas en las top-80 revistas SJR ----------------------------
+message(glue("[2/2] Temas en las top-{TOP_SJR} revistas SJR…"))
 sec3 <- character(0)
 seen_topic <- character(0)
 for (g in temas) {
@@ -88,9 +86,7 @@ body <- c(
   glue("Ventana: últimos {DAYS_BACK} días. Fuente: OpenAlex. Filtro temático: top-{TOP_SJR} SJR.\n"),
   "### 1) Novedades en tus revistas",
   if (length(sec1)) sec1 else "_Sin novedades esta semana._",
-  "\n### 2) Convocatorias (calls / special issues / symposiums)",
-  "_Detección automática pendiente (las webs de convocatorias bloquean el acceso). De momento revísalas a mano._",
-  glue("\n### 3) Papers nuevos sobre tus temas (top-{TOP_SJR} SJR)"),
+  glue("\n### 2) Papers nuevos sobre tus temas (top-{TOP_SJR} SJR)"),
   wl_note,
   if (length(sec3)) sec3 else "_Sin novedades esta semana._"
 )
