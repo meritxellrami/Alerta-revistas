@@ -1,0 +1,77 @@
+# Revistas a vigilar para novedades semanales.
+# - issn: cualquiera de los ISSN de la revista (sirve el impreso). Resuelto vía Crossref.
+# - calls_url: (opcional) página de "call for papers" / announcements de la revista.
+#              Si lo rellenas, el sistema detecta novedades en esa página por diff semanal.
+journals:
+  - name: American Political Science Review
+    issn: "0003-0554"
+    calls_url: ""
+  - name: American Journal of Political Science
+    issn: "0092-5853"
+    calls_url: ""
+  - name: The Journal of Politics
+    issn: "0022-3816"
+    calls_url: ""
+  - name: British Journal of Political Science
+    issn: "0007-1234"
+    calls_url: ""
+  - name: Comparative Political Studies
+    issn: "0010-4140"
+    calls_url: ""
+  - name: Political Behavior
+    issn: "0190-9320"
+    calls_url: ""
+  - name: Political Psychology
+    issn: "0162-895X"
+    calls_url: ""
+  - name: Public Opinion Quarterly
+    issn: "0033-362X"
+    calls_url: ""
+  - name: Electoral Studies
+    issn: "0261-3794"
+    calls_url: ""
+  - name: Party Politics
+    issn: "1354-0688"
+    calls_url: ""
+  - name: European Journal of Political Research
+    issn: "0304-4130"
+    calls_url: ""
+  - name: Annual Review of Political Science
+    issn: "1094-2939"
+    calls_url: ""
+  - name: Political Analysis
+    issn: "1047-1987"
+    calls_url: ""
+  - name: World Politics
+    issn: "0043-8871"
+    calls_url: ""
+  - name: West European Politics
+    issn: "0140-2382"
+    calls_url: ""
+  - name: European Political Science Review
+    issn: "1755-7739"
+    calls_url: ""
+  - name: South European Society & Politics
+    issn: "1360-8746"
+    calls_url: ""
+  - name: Research & Politics
+    issn: "2053-1680"
+    calls_url: ""
+  - name: Journal of Public Administration Research and Theory
+    issn: "1053-1858"
+    calls_url: ""
+  - name: Policy & Society
+    issn: "1449-4035"
+    calls_url: ""
+  - name: Political Geography
+    issn: "0962-6298"
+    calls_url: ""
+  - name: Contemporary Security Policy
+    issn: "1352-3260"
+    calls_url: ""
+  - name: Politics & Gender
+    issn: "1743-923X"
+    calls_url: ""
+  - name: Journal of European Public Policy
+    issn: "1350-1763"
+    calls_url: ""

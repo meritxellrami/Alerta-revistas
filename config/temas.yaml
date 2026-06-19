@@ -1,0 +1,44 @@
+# Búsqueda temática semanal en revistas Q1 (SJR, Ciencia Política).
+# Cada grupo se busca en título+resumen (OpenAlex). Edita libremente.
+#
+# - search_any:  se busca CADA frase por separado; se unen los resultados (OR).
+# - must_also:   (opcional) filtro extra: el paper debe contener ADEMÁS al menos
+#                una de estas palabras en título/resumen. Vacío = sin filtro extra.
+#
+# Nota: no uses comas dentro de una frase (la API las interpreta como separador).
+
+groups:
+  - id: affective_polarization
+    label: "Affective polarization (amplio)"
+    search_any:
+      - "affective polarization"
+      - "partisan animosity"
+      - "partisan hostility"
+      - "out-party hostility"
+      - "outparty hostility"
+      - "negative partisanship"
+      - "partisan affect"
+      - "interparty hostility"
+      - "affective polarisation"
+    must_also: []
+
+  - id: threat_x_polarization
+    label: "Amenaza externa / política internacional × polarización doméstica"
+    search_any:
+      - "external threat"
+      - "foreign threat"
+      - "international crisis"
+      - "interstate conflict"
+      - "rally round the flag"
+      - "diversionary foreign policy"
+      - "out-group threat"
+      - "national security threat"
+      - "international conflict"
+    must_also:
+      - "polarization"
+      - "polarisation"
+      - "partisanship"
+      - "partisan"
+      - "in-party"
+      - "out-party"
+      - "in-group"
