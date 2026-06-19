@@ -41,8 +41,9 @@ SKIP_TITLE <- c("front matter", "back matter", "book review", "correction to",
                 "corrigendum", "erratum", "issue information", "editorial board")
 
 # ---- Sección 1: novedades por revista (agrupadas por revista) ----------------
+# Cada revista con novedades = un bloque: encabezado en negrita + viñetas debajo.
 message("[1/2] Novedades por revista…")
-sec1 <- character(0)
+sec1_blocks <- character(0)
 for (j in revistas) {
   works <- lapply(oa_works_by_issn(j$issn, from_date), extract_work)
   items <- character(0)
@@ -51,16 +52,19 @@ for (j in revistas) {
     tl <- tolower(w$title)
     if (any(vapply(SKIP_TITLE, function(k) grepl(k, tl, fixed = TRUE), logical(1)))) next
     aut   <- if (nchar(w$authors) > 0) w$authors else "autores n/d"
-    items <- c(items, glue("- <span style=\"font-size:90%\">[{w$title}]({w$url}) — {aut}</span>"))
+    items <- c(items, paste0("- <span style=\"font-size:90%\">[", w$title, "](", w$url,
+                             ") — ", aut, "</span>"))
     new_ids$articulos <- c(new_ids$articulos, w$id)
   }
-  if (length(items)) sec1 <- c(sec1, glue("\n**{j$name}**\n"), items)
+  if (length(items))
+    sec1_blocks <- c(sec1_blocks, paste0("**", j$name, "**\n\n", paste(items, collapse = "\n")))
   Sys.sleep(0.15)
 }
+sec1_md <- if (length(sec1_blocks)) paste(sec1_blocks, collapse = "\n\n") else "_Sin novedades esta semana._"
 
 # ---- Sección 2: temas en las top-80 revistas SJR ----------------------------
 message(glue("[2/2] Temas en las top-{TOP_SJR} revistas SJR…"))
-sec3 <- character(0)
+sec3_blocks <- character(0)
 seen_topic <- character(0)
 for (g in temas) {
   hits <- list()
@@ -78,29 +82,29 @@ for (g in temas) {
     Sys.sleep(0.15)
   }
   if (length(hits) > 0) {
-    sec3 <- c(sec3, glue("\n**{g$label}**\n"),
-              vapply(hits, fmt_item, character(1)))
+    lines <- vapply(hits, fmt_item, character(1))
+    sec3_blocks <- c(sec3_blocks, paste0("**", g$label, "**\n\n", paste(lines, collapse = "\n")))
     new_ids$temas <- c(new_ids$temas, names(hits))
   }
 }
+sec3_md <- if (length(sec3_blocks)) paste(sec3_blocks, collapse = "\n\n") else "_Sin novedades esta semana._"
 
 # ---- Montaje del correo ------------------------------------------------------
 wl_note <- if (is.null(wlset))
-  "> ⚠️ Falta `config/sjr_political_science.csv` (export de Scimago). Sin él no puedo aplicar el filtro top-80; ver README.\n" else ""
+  "> ⚠️ Falta `config/sjr_political_science.csv` (export de Scimago). Sin él no puedo aplicar el filtro top-80; ver README.\n\n" else ""
 
-body <- c(
-  glue("## 📚 Alerta de revistas — semana del {Sys.Date()}"),
-  glue("Ventana: últimos {DAYS_BACK} días. Fuente: OpenAlex. Filtro temático: top-{TOP_SJR} SJR.\n"),
-  "### 1) Novedades en tus revistas",
-  if (length(sec1)) sec1 else "_Sin novedades esta semana._",
-  glue("\n### 2) Papers nuevos sobre tus temas (top-{TOP_SJR} SJR)"),
+md <- paste0(
+  "## 📚 Alerta de revistas — semana del ", Sys.Date(), "\n\n",
+  "Ventana: últimos ", DAYS_BACK, " días. Fuente: OpenAlex. Filtro temático: top-", TOP_SJR, " SJR.\n\n",
+  "### 1) Novedades en tus revistas\n\n",
+  sec1_md, "\n\n",
+  "### 2) Papers nuevos sobre tus temas (top-", TOP_SJR, " SJR)\n\n",
   wl_note,
-  if (length(sec3)) sec3 else "_Sin novedades esta semana._"
+  sec3_md, "\n"
 )
-md <- paste(body, collapse = "\n")
 
 total_new <- length(unlist(new_ids))
-message(glue("Resultados: {length(sec1)} arts. revista | ",
+message(glue("Resultados: {length(unlist(new_ids$articulos))} arts. revista | ",
              "{length(unlist(new_ids$temas))} temas | {total_new} novedades en total."))
 
 if (DRY_RUN) {
