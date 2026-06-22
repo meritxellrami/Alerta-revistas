@@ -2,7 +2,7 @@ name: Alerta revistas semanal
 
 on:
   schedule:
-    - cron: "0 13 * * 4"   # jueves 13:00 UTC = 15:00 hora española (verano) / 14:00 (invierno)
+    - cron: "0 7 * * 1"   # lunes 07:00 UTC = 09:00 hora española (verano) / 08:00 (invierno)
   workflow_dispatch:        # permite lanzarlo a mano desde la pestaña Actions
     inputs:
       ignore_seen:
