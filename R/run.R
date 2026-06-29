@@ -113,6 +113,14 @@ if (DRY_RUN) {
   quit(save = "no")
 }
 
+# Si no hay novedades, no se envía nada. Esto permite programar varios horarios
+# de respaldo el mismo día: el primero que encuentre algo lo envía y los siguientes,
+# al no quedar nada nuevo, no mandan un correo vacío.
+if (total_new == 0 && !IGNORE_SEEN) {
+  message("Sin novedades: no se envía correo (los horarios de respaldo evitan duplicados).")
+  quit(save = "no")
+}
+
 # ---- Envío por Gmail ---------------------------------------------------------
 suppressWarnings(suppressMessages(library(blastula)))
 user <- Sys.getenv("SMTP_USERNAME")

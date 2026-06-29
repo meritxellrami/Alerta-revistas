@@ -2,10 +2,14 @@ name: Alerta revistas semanal
 
 on:
   schedule:
-    - cron: "7 7 * * 1"   # lunes 07:07 UTC = 09:07 hora española (verano) / 08:07 (invierno)
-    # Nota: se usa un minuto "raro" (no :00) porque GitHub retrasa/omite las tareas
-    # programadas a las en punto cuando hay mucha carga. Aun así pueden llegar con
-    # algo de retraso; no está garantizado al minuto exacto.
+    # Varios horarios de respaldo el lunes por la mañana. El primero que encuentre
+    # novedades envía el correo; los siguientes, al no quedar nada nuevo, no envían
+    # (ver lógica "Sin novedades" en R/run.R). Basta con que uno de ellos funcione.
+    # Se usan minutos "raros" (no :00) porque GitHub retrasa/omite las tareas
+    # programadas a las en punto cuando hay mucha carga.
+    - cron: "7 7 * * 1"    # lunes 09:07 hora española (verano)
+    - cron: "7 8 * * 1"    # respaldo: 10:07 hora española (verano)
+    - cron: "23 9 * * 1"   # respaldo: 11:23 hora española (verano)
   workflow_dispatch:        # permite lanzarlo a mano desde la pestaña Actions
     inputs:
       ignore_seen:
