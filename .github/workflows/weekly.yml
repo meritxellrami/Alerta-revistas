@@ -40,6 +40,11 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
           IGNORE_SEEN: ${{ inputs.ignore_seen == true && '1' || '0' }}
+          # El top-80 de "Sociology and Political Science" (SJR) es casi todo
+          # ciencia política y management: solo ~11 revistas sociológicas.
+          # Con 150 entran Social Forces (#93), British Journal of Sociology (#106)
+          # y Social Science Research (#119).
+          TOP_SJR: "150"
         run: Rscript R/run.R
 
       - name: Guardar estado (artículos ya enviados)
