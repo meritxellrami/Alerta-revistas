@@ -1,4 +1,4 @@
-# Búsqueda temática semanal en revistas Q1 (SJR, Ciencia Política).
+# Búsqueda temática semanal en revistas Q1 (SJR, Sociología).
 # Cada grupo se busca en título+resumen (OpenAlex). Edita libremente.
 #
 # - search_any:  se busca CADA frase por separado; se unen los resultados (OR).
@@ -8,39 +8,71 @@
 # Nota: no uses comas dentro de una frase (la API las interpreta como separador).
 
 groups:
-  - id: affective_polarization
-    label: "Affective polarization (amplio)"
+  - id: gender_norms
+    label: "Normas y actitudes de género (amplio)"
     search_any:
-      - "affective polarization"
-      - "partisan animosity"
-      - "partisan hostility"
-      - "out-party hostility"
-      - "outparty hostility"
-      - "negative partisanship"
-      - "partisan affect"
-      - "interparty hostility"
-      - "affective polarisation"
-      - "polarization"
+      - "gender norms"
+      - "gender ideology"
+      - "gender role attitudes"
+      - "gender attitudes"
+      - "gender egalitarianism"
+      - "egalitarian attitudes"
+      - "traditional gender roles"
+      - "gender essentialism"
+      - "gender beliefs"
+      - "attitudes toward gender equality"
+      - "doing gender"
     must_also: []
 
-  - id: threat_x_polarization
-    label: "Amenaza externa / política internacional × polarización doméstica"
+  - id: couple_dynamics_x_gender
+    label: "Dinámicas de pareja × género"
     search_any:
-      - "external threat"
-      - "foreign threat"
-      - "international crisis"
-      - "interstate conflict"
-      - "rally round the flag"
-      - "diversionary foreign policy"
-      - "out-group threat"
-      - "national security threat"
-      - "international conflict"
-      - "security threat"
+      - "relationship satisfaction"
+      - "marital satisfaction"
+      - "relationship quality"
+      - "marital quality"
+      - "union dissolution"
+      - "marital dissolution"
+      - "marital disruption"
+      - "divorce risk"
+      - "risk of separation"
+      - "union formation"
+      - "union stability"
+      - "cohabitation"
+      - "cohabiting couples"
+      - "repartnering"
+      - "transition to parenthood"
     must_also:
-      - "polarization"
-      - "polarisation"
-      - "partisanship"
-      - "partisan"
-      - "in-party"
-      - "out-party"
-      - "in-group"
+      - "gender"
+      - "gendered"
+      - "women"
+      - "men"
+      - "wives"
+      - "husbands"
+      - "egalitarian"
+      - "housework"
+
+  - id: housework_fairness
+    label: "División del trabajo doméstico y percepción de justicia"
+    search_any:
+      - "division of housework"
+      - "division of household labor"
+      - "division of household labour"
+      - "domestic labor"
+      - "domestic labour"
+      - "unpaid work"
+      - "unpaid care work"
+      - "childcare division"
+      - "division of childcare"
+      - "perceived fairness"
+      - "fairness of the division of labor"
+      - "sense of fairness"
+      - "second shift"
+      - "dual-earner couples"
+      - "dual earner"
+      - "male breadwinner"
+      - "female breadwinner"
+      - "relative resources"
+      - "bargaining within couples"
+      - "time use of couples"
+    must_also: []

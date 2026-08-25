@@ -3,65 +3,56 @@
 # - calls_url: (opcional) página de "call for papers" / announcements de la revista.
 #              Si lo rellenas, el sistema detecta novedades en esa página por diff semanal.
 journals:
-  - name: American Political Science Review
-    issn: "0003-0554"
+  - name: American Sociological Review
+    issn: "0003-1224"
     calls_url: ""
-  - name: American Journal of Political Science
-    issn: "0092-5853"
+  - name: American Journal of Sociology
+    issn: "0002-9602"
     calls_url: ""
-  - name: The Journal of Politics
-    issn: "0022-3816"
+  - name: Annual Review of Sociology
+    issn: "0360-0572"
     calls_url: ""
-  - name: British Journal of Political Science
-    issn: "0007-1234"
+  - name: Social Forces
+    issn: "0037-7732"
     calls_url: ""
-  - name: Comparative Political Studies
-    issn: "0010-4140"
+  - name: Sociological Science
+    issn: "2330-6696"
     calls_url: ""
-  - name: Political Behavior
-    issn: "0190-9320"
+  - name: European Sociological Review
+    issn: "0266-7215"
     calls_url: ""
-  - name: Political Psychology
-    issn: "0162-895X"
+  - name: Sociology (British Sociological Association)
+    issn: "0038-0385"
     calls_url: ""
-  - name: Public Opinion Quarterly
-    issn: "0033-362X"
+  - name: The British Journal of Sociology
+    issn: "0007-1315"
     calls_url: ""
-  - name: Electoral Studies
-    issn: "0261-3794"
+  - name: Social Science Research
+    issn: "0049-089X"
     calls_url: ""
-  - name: Party Politics
-    issn: "1354-0688"
+  - name: Demography
+    issn: "0070-3370"
     calls_url: ""
-  - name: European Journal of Political Research
-    issn: "0304-4130"
+  - name: Demographic Research
+    issn: "1435-9871"
     calls_url: ""
-  - name: Annual Review of Political Science
-    issn: "1094-2939"
+  - name: Population Studies
+    issn: "0032-4728"
     calls_url: ""
-  - name: Political Analysis
-    issn: "1047-1987"
+  - name: Population and Development Review
+    issn: "0098-7921"
     calls_url: ""
-  - name: World Politics
-    issn: "0043-8871"
+  - name: European Journal of Population
+    issn: "0168-6577"
     calls_url: ""
-  - name: West European Politics
-    issn: "0140-2382"
+  - name: Journal of Marriage and Family
+    issn: "0022-2445"
     calls_url: ""
-  - name: European Political Science Review
-    issn: "1755-7739"
+  - name: Journal of Family Issues
+    issn: "0192-513X"
     calls_url: ""
-  - name: South European Society & Politics
-    issn: "1360-8746"
-    calls_url: ""
-  - name: Research & Politics
-    issn: "2053-1680"
-    calls_url: ""
-  - name: Political Geography
-    issn: "0962-6298"
-    calls_url: ""
-  - name: Contemporary Security Policy
-    issn: "1352-3260"
+  - name: Gender & Society
+    issn: "0891-2432"
     calls_url: ""
   - name: Politics & Gender
     issn: "1743-923X"
