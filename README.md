@@ -28,9 +28,9 @@ El CSV usa `;` como separador y trae la columna `Rank`; el sistema se queda con 
 ### 3. Subir a GitHub y configurar secretos
 1. Crea un repositorio en GitHub y sube esta carpeta.
 2. En el repo: **Settings → Secrets and variables → Actions → New repository secret**. Crea:
-   - `SMTP_USERNAME` = `david.sanper99@gmail.com`
+   - `SMTP_USERNAME` = la cuenta de Google que generó la contraseña de aplicación
    - `SMTP_PASSWORD` = la contraseña de aplicación del paso 1
-   - `MAIL_TO` = `david.sanper99@gmail.com` (o donde quieras recibirlo)
+   - `MAIL_TO` = `meritxell.rami@upf.edu` (o donde quieras recibirlo)
 3. En **Settings → Actions → General → Workflow permissions**, marca **Read and write permissions** (para que el bot pueda guardar el estado).
 4. Ve a la pestaña **Actions**, elige *"Alerta revistas semanal"* y pulsa **Run workflow** para probarlo ya.
 

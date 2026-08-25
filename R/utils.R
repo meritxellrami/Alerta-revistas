@@ -5,7 +5,7 @@ suppressWarnings(suppressMessages({
 
 `%||%` <- function(a, b) if (is.null(a) || length(a) == 0 || (length(a) == 1 && is.na(a))) b else a
 
-OA_MAILTO <- Sys.getenv("OPENALEX_MAILTO", "david.sanper99@gmail.com")
+OA_MAILTO <- Sys.getenv("OPENALEX_MAILTO", "meritxell.rami@upf.edu")
 
 enc <- function(x) utils::URLencode(x, reserved = TRUE)
 
@@ -44,8 +44,12 @@ oa_works_by_issn <- function(issn, from_date) {
 }
 
 oa_works_by_topic <- function(phrase, from_date) {
+  # Las comillas fuerzan búsqueda de FRASE EXACTA en OpenAlex. Sin ellas la API
+  # busca las palabras por separado y devuelve muchísimo ruido: por ejemplo
+  # "relationship satisfaction" pasa de 15 resultados a 418, colando papers de
+  # marketing sobre "user satisfaction".
   oa_request(sprintf("type:article,from_publication_date:%s,title_and_abstract.search:%s",
-                     from_date, enc(phrase)))
+                     from_date, enc(sprintf('"%s"', phrase))))
 }
 
 reconstruct_abstract <- function(idx) {
